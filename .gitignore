@@ -277,3 +277,6 @@ TSWLatexianTemp*
 
 # pdf
 *.pdf
+
+# MacOS junk
+.DS_Store
