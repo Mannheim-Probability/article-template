@@ -15,12 +15,17 @@
 
 %%
 
+\newcommand*{\dims}{d}
+
 % spaces
 \newcommand*{\real}{\mathbb{R}}
 \newcommand*{\nat}{\mathbb{N}}
 \newcommand*{\integer}{\mathbb{Z}}
 \newcommand*{\complex}{\mathbb{C}}
 \newcommand*{\rational}{\mathbb{Q}}
+
+% Topology
+\newcommand*{\closure}[1]{\overline{#1}}
 
 % Probability
 \newcommand{\E}{\mathbb{E}}
@@ -31,17 +36,29 @@
 \newcommand*{\density}{\varphi}
 \DeclareMathOperator{\iid}{iid}
 
+% random functions
+\newcommand*{\rf}{\mathbf{f}}
+
 % Linear Algebra
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\Span}{span}
 \newcommand{\identity}{\mathbb{I}}
+\newcommand*{\transpose}{T}
 
 % Optimization
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\argmax}{arg\,max}
+
+% Machine Learning
 \newcommand*{\cost}{J}
+\newcommand*{\Cost}{\mathbf{J}}
 \newcommand*{\loss}{\ell}
-\newcommand*{\transpose}{T}
+\newcommand*{\noise}{\varsigma}
+\newcommand*{\param}{w}
+\newcommand*{\model}{\phi}
+\newcommand*{\X}{X}
+\newcommand*{\Y}{Y}
+
 
 % Numerical Analysis
 \newcommand*{\bigO}{\mathcal{O}}
