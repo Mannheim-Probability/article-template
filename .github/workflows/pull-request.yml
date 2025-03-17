@@ -28,7 +28,7 @@ jobs:
           root_file: "ms.tex"
       
       - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v2.2.4
+        uses: actions/upload-artifact@v4
         with:
           # Artifact name
           name: ${{ github.event.pull_request.title }} 
