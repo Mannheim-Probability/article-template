@@ -13,10 +13,16 @@
 
 %%
 
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\ol}[1]{\overline{#1}}
+
 \newcommand*{\dims}{d}
 \DeclarePairedDelimiter{\abs}{\lvert}{\rvert} % absolute value
 \DeclarePairedDelimiter{\set}{\{}{\}} % set
 \DeclarePairedDelimiter{\norm}{\|}{\|} % norm
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
 
 % e.g. \ind{A} for 1_A or \ind*{A} for 1_{\set{A}},
 % and \ind*[\Big]{A} for 1_{\set[\Big]{A}}
@@ -51,6 +57,7 @@
 
 \DeclareMathOperator{\as}{a.s.}
 \DeclareMathOperator{\iid}{iid}
+\DeclareMathOperator{\fdd}{f.d.d.}
 
 \newcommand*{\density}{\varphi}
 \newcommand*{\charFct}{\Psi} % characteristic function
@@ -129,4 +136,31 @@
 \newcommand*{\colorPrimary}[2][]{\textcolor{primary#1}{#2}}
 \newcommand*{\colorAccent}[1]{\textcolor{accent}{#1}}
 \newcommand*{\red}[1]{\textcolor{red}{#1}}
+
+
+%%% === Lists ===
+
+\newlist{steps}{enumerate}{1}
+\setlist[steps]{
+    label=\textbf{Step \arabic*:},
+    ref={Step \arabic*},
+    wide=0pt,
+}
+
+
+%
+% USAGE: Create a new constant with \defConst{myConstant}
+% use it with \ref{const: myConstant}.
+
+\makeatletter
+\newcounter{constants}
+\setcounter{constants}{-1} % start counting at 0
+\newcommand*{\defConst}[1]{%
+    \stepcounter{constants}%
+    \edef\const@temp{\arabic{constants}}%
+    \hypertarget{const:#1}{}%
+    \immediate\write\@auxout{\string\newlabel{const: #1}{{\noexpand\ensuremath{c_{\const@temp}}}{\thepage}{\noexpand\ensuremath{c_{\const@temp}}}{const:#1}{}}}%
+    \ensuremath{c_{\const@temp}}%
+}
+\makeatother
 
