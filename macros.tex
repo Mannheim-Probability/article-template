@@ -9,13 +9,22 @@
 \newtheorem{definition}[prop]{Definition}
 \newtheorem{example}[prop]{Example}
 \newtheorem{assumption}[prop]{Assumption}
-
-\theoremstyle{remark}
 \newtheorem{remark}[prop]{Remark}
 
 %%
 
 \newcommand*{\dims}{d}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert} % absolute value
+\DeclarePairedDelimiter{\set}{\{}{\}} % set
+\DeclarePairedDelimiter{\norm}{\|}{\|} % norm
+
+% e.g. \ind{A} for 1_A or \ind*{A} for 1_{\set{A}},
+% and \ind*[\Big]{A} for 1_{\set[\Big]{A}}
+\NewDocumentCommand{\ind}{s o m}{%
+  \IfBooleanTF{#1}
+    {\mathbf{1}_{\set[#2]{#3}}} % starred: wrap in braces
+    {\mathbf{1}_{#3}}           % unstarred: simple subscript
+}
 
 % spaces
 \newcommand*{\real}{\mathbb{R}}
@@ -23,25 +32,59 @@
 \newcommand*{\integer}{\mathbb{Z}}
 \newcommand*{\complex}{\mathbb{C}}
 \newcommand*{\rational}{\mathbb{Q}}
+\newcommand*{\field}{\mathbb{F}}
+\newcommand*{\hilbert}{\mathcal{H}}
+\newcommand*{\sphere}[1][\dims-1]{\mathbb{S}^{#1}}
+\DeclarePairedDelimiterXPP{\ball}[2]{\mathrm{B}}{(}{)}{}{#1, #2}
 
 % Topology
 \newcommand*{\closure}[1]{\overline{#1}}
+\newcommand*{\interior}[1]{#1^{\circ}}
+\newcommand*{\metric}{d}
 
 % Probability
-\newcommand{\E}{\mathbb{E}}
-\renewcommand{\Pr}{\mathbb{P}}
-\DeclareMathOperator{\Var}{Var}
-\DeclareMathOperator{\Cov}{Cov}
-\newcommand*{\normal}{\mathcal{N}}
-\newcommand*{\density}{\varphi}
+\newcommand*{\pSym}{\mathsf{P}} % probability
+\DeclarePairedDelimiterXPP{\prob}[1]{\pSym}{\{}{\}}{}{#1}
+\newcommand{\eSym}{\mathsf{E}} % expectation
+\DeclarePairedDelimiterXPP{\E}[1]{\eSym}{[}{]}{}{#1}
+
+
+\DeclareMathOperator{\as}{a.s.}
 \DeclareMathOperator{\iid}{iid}
+
+\newcommand*{\density}{\varphi}
+\newcommand*{\charFct}{\Psi} % characteristic function
+\newcommand*{\MGF}{M} % moment generating function
+\newcommand*{\CGF}{\Lambda} % cumulant generating function
+
+% distributions
+\DeclarePairedDelimiterXPP{\normal}[2]{\mathcal{N}}{(}{)}{}{#1, #2}
+\DeclarePairedDelimiterXPP{\uniform}[2]{\mathcal{U}}{(}{)}{}{#1, #2}
+\DeclarePairedDelimiterXPP{\binomial}[2]{\mathrm{Bin}}{(}{)}{}{#1, #2}
+\DeclarePairedDelimiterXPP{\poisson}[1]{\mathrm{Poi}}{(}{)}{}{#1}
+\DeclarePairedDelimiterXPP{\bernoulli}[1]{\mathrm{Ber}}{(}{)}{}{#1}
+\DeclarePairedDelimiterXPP{\exponential}[1]{\mathrm{Exp}}{(}{)}{}{#1}
+
+% statistics
+\newcommand*{\mean}{\overline}
+\newcommand*{\varSym}{\mathsf{var}} % variance
+\DeclarePairedDelimiterXPP{\var}[1]{\varSym}{[}{]}{}{#1}
+\newcommand*{\covSym}{\mathsf{cov}} % inner covariance cov[x,y] = \E{\scp{x-\E{x}}{y-\E{y}}}
+\DeclarePairedDelimiterXPP{\cov}[2]{\covSym}{[}{]}{}{#1, #2}
+\newcommand*{\CovSym}{\mathsf{Cov}} % outer covariance Cov[X] = \E{(X-\E{X})(X-\E{X})^T}
+\DeclarePairedDelimiterXPP{\Cov}[1]{\CovSym}{[}{]}{}{#1}
+\newcommand*{\mSym}{\mathsf{M}} % median
+\DeclarePairedDelimiterXPP{\median}[1]{\mSym}{[}{]}{}{#1}
 
 % random functions
 \newcommand*{\rf}{\mathbf{f}}
+\newcommand*{\rg}{\mathbf{g}}
 
 % Linear Algebra
-\DeclareMathOperator{\sgn}{sgn}
-\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\sgn}{sgn} % sign function
+\DeclareMathOperator{\Span}{span} % span of a set of vectors
+\DeclareMathOperator{\tr}{tr} % trace
+\DeclarePairedDelimiter{\scp}{\langle}{\rangle} % scalar product
 \newcommand{\identity}{\mathbb{I}}
 \newcommand*{\transpose}{T}
 
@@ -83,6 +126,7 @@
 % ------------------------------------------
 
 % --- convenient color access ---
-\newcommand*{\colorPrimary}[2][]{{\color{primary#1} #2}}
-\newcommand*{\colorAccent}[1]{{\color{accent} #1}}
+\newcommand*{\colorPrimary}[2][]{\textcolor{primary#1}{#2}}
+\newcommand*{\colorAccent}[1]{\textcolor{accent}{#1}}
+\newcommand*{\red}[1]{\textcolor{red}{#1}}
 
